@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 public class UsersService {
@@ -16,9 +18,15 @@ public class UsersService {
         this.usersRepository = usersRepository;
     }
 
+    public User findUser(String mail) {
+        Optional<User> foundUser = usersRepository.findUserByMail(mail);
+        return foundUser.orElse(null);
+    }
+
     @Transactional
     public void save(User user){
         usersRepository.save(user);
     }
+
 
 }
