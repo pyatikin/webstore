@@ -1,6 +1,6 @@
 package com.sipi.webstore.services;
 
-import com.sipi.webstore.models.User;
+import com.sipi.webstore.models.Users;
 import com.sipi.webstore.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +24,15 @@ public class UsersService {
     }
 
     ///\brief Метод поиска пользователя по почте
-    public User findUser(String mail) {
-        Optional<User> foundUser = usersRepository.findUserByMail(mail);
+    public Users findUser(String mail) {
+        Optional<Users> foundUser = usersRepository.findUserByMail(mail);
         return foundUser.orElse(null);
     }
 
     ///\brief Метод сохранения пользоватедя в БД
     @Transactional
-    public void save(User user){
-        usersRepository.save(user);
+    public void save(Users users){
+        usersRepository.save(users);
     }
 
 
