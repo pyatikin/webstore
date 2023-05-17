@@ -2,9 +2,7 @@ package com.sipi.webstore.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /// \brief Класс описывающий пользователя в системе
 /// Класс который используется как модель для работы с данными всех пользователей,
@@ -12,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @Data
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class Users {
@@ -31,4 +30,10 @@ public class Users {
     private String phone; /// Поле телефон пользователя в БД
     @Column(name = "password")
     private String password; /// Поле пароль пользователя в БД
+
+    public Users(String name, String mail, String password) {
+        this.name = name;
+        this.mail = mail;
+        this.password = password;
+    }
 }

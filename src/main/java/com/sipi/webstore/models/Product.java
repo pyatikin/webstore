@@ -5,23 +5,29 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.extern.apachecommons.CommonsLog;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Blob;
 
 @Entity
 @Table(name = "product")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     @Id
     @Column(name = "productId")
     private int productId;
-    @Column(name = "name")
-    private String name;
+    @Column(name = "image")
+    private Blob image;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "description")
+    private String description;
     @Column(name = "price")
     private  int price;
-    @Column(name = "image")
-    private String image;
+
 
 }

@@ -3,9 +3,11 @@ package com.sipi.webstore.controllers;
 import com.sipi.webstore.models.Users;
 import com.sipi.webstore.services.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 ///\brief Контрооллер для обработки обращений для входа в систему
@@ -23,7 +25,6 @@ public class Login {
     private final UsersService usersService; ///Класс, который связывает модель пользователя и БД
 
     ///\brief Конструктор класса
-    @Autowired
     public Login(UsersService usersService) {
         this.usersService = usersService;
     }
@@ -54,12 +55,12 @@ public class Login {
         return "login";
     }
     /// \brief Метод для проверки новогго зарегестрированного пользователя
-    @PostMapping("registration")
+    /*@PostMapping("registration")
     public void checkRegistration(HttpServletRequest httpServletRequest){
         //Map<String, String[]> attributes = httpServletRequest.getParameterMap();
         //System.out.println(attributes.get("name"). + attributes.get("mail")[0] + attributes.get("phone")[0] + attributes.get("password")[0]);
         Users users = new Users(0, httpServletRequest.getParameter("name"), httpServletRequest.getParameter("email"), httpServletRequest.getParameter("phone"), httpServletRequest.getParameter("password"));
         usersService.save(users);
         System.out.println("adding...");
-    }
+    }*/
 }
