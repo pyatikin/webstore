@@ -1,15 +1,10 @@
 package com.sipi.webstore.models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Blob;
 
 @Entity
 @Table(name = "product")
@@ -20,8 +15,9 @@ public class Product {
     @Id
     @Column(name = "productId")
     private int productId;
-    @Column(name = "image")
-    private Blob image;
+    @Lob
+    @Column(name = "image", length = 1_048_576)
+    private String image;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
