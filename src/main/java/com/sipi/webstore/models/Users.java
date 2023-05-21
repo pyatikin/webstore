@@ -3,6 +3,12 @@ package com.sipi.webstore.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 /// \brief Класс описывающий пользователя в системе
 /// Класс который используется как модель для работы с данными всех пользователей,
@@ -13,7 +19,8 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+@Builder
+public class Users implements UserDetails {
 
     @Id
     @Column(name = "id")
@@ -31,9 +38,42 @@ public class Users {
     @Column(name = "password")
     private String password; /// Поле пароль пользователя в БД
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public Users(String name, String mail, String password) {
         this.name = name;
         this.mail = mail;
         this.password = password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return mail;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
