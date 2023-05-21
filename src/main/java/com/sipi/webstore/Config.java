@@ -14,16 +14,15 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Configuration
 public class Config {
     @Bean
     public CommandLineRunner commandLineRunner(OrderRepository orderRepository, ProductRepository productRepository) {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file1 = new File(Objects.requireNonNull(classLoader.getResource("static/food1.png")).getFile());
+        File file1 = new File(classLoader.getResource("static/food1.png").getFile());
         byte[] bFile1 = new byte[(int) file1.length()];
-        File file2 = new File(Objects.requireNonNull(classLoader.getResource("static/food2.png")).getFile());
+        File file2 = new File(classLoader.getResource("static/food2.png").getFile());
         byte[] bFile2 = new byte[(int) file2.length()];
         try (FileInputStream fileInputStream1 = new FileInputStream(file1);
              FileInputStream fileInputStream2 = new FileInputStream(file2)) {
