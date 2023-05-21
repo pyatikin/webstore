@@ -54,7 +54,7 @@ public class Config {
                 fileInputStream.read(bFile1);
                 fileInputStream.read(bFile2);
             } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return args -> {
             orderRepository.save(new Orders(1,1,1,1,1,1,new Date(), "123"));
