@@ -21,7 +21,7 @@ public class Config {
     public CommandLineRunner commandLineRunner(OrderRepository orderRepository, ProductRepository productRepository) {
 
         ClassLoader classLoader = getClass().getClassLoader();
-        File file1 = new File(classLoader.getResource("food1.png").getFile());
+        File file1 = new File(classLoader.getResource("/food1.png").getFile());
         byte[] bFile1 = new byte[(int) file1.length()];
         /*File file2 = new File(classLoader.getResource("food2.png").getFile());
         byte[] bFile2 = new byte[(int) file2.length()];*/
