@@ -14,52 +14,30 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Configuration
 public class Config {
     @Bean
     public CommandLineRunner commandLineRunner(OrderRepository orderRepository, ProductRepository productRepository) {
-        //String path = ("src/main/resources/food1.png");
-
-        /*try {
-            // Загрузка изображения из файла
-            BufferedImage image = ImageIO.read(new File("C:\\Users\\pyatk\\IdeaProjects\\webstore\\src\\main\\resources\\static\\food1.png"));
-
-            // Создание объекта ByteArrayOutputStream для записи данных изображения
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            // Запись изображения в ByteArrayOutputStream в формате JPEG
-            ImageIO.write(image, "png", baos);
-
-            // Преобразование данных изображения в массив байтов
-            byte[] imageBytes = baos.toByteArray();
-
-            // Создание объекта BLOB из массива байтов
-            Blob blob = new SerialBlob(imageBytes);
-
-            // Использование объекта BLOB по вашему усмотрению (например, сохранение в базу данных)
-            // ...
-
-            // Закрытие потока ByteArrayOutputStream
-            baos.close();
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }*/
-
-        File file1 = new File("C:\\Users\\pyatk\\IdeaProjects\\webstore\\src\\main\\resources\\static\\food1.png");
-        byte [] bFile1 = new byte[(int) file1.length()];
-        File file2 = new File("C:\\Users\\pyatk\\IdeaProjects\\webstore\\src\\main\\resources\\static\\food2.png");
-        byte [] bFile2 = new byte[(int) file2.length()];
-            try (FileInputStream fileInputStream = new FileInputStream(file1)) {
-                fileInputStream.read(bFile1);
-                fileInputStream.read(bFile2);
-            } catch (IOException e) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file1 = new File(Objects.requireNonNull(classLoader.getResource("static/food1.png")).getFile());
+        byte[] bFile1 = new byte[(int) file1.length()];
+        File file2 = new File(Objects.requireNonNull(classLoader.getResource("static/food2.png")).getFile());
+        byte[] bFile2 = new byte[(int) file2.length()];
+        try (FileInputStream fileInputStream1 = new FileInputStream(file1);
+             FileInputStream fileInputStream2 = new FileInputStream(file2)) {
+            fileInputStream1.read(bFile1);
+            fileInputStream2.read(bFile2);
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         return args -> {
-            orderRepository.save(new Orders(1,1,1,1,1,1,new Date(), "123"));
-            productRepository.saveAll(List.of(new Product(1, Base64.getEncoder().encodeToString(bFile1), "Food1", "", 100),
-                    new Product(2, Base64.getEncoder().encodeToString(bFile2), "Food2", "", 200)));
+            orderRepository.save(new Orders(1, 1, 1, 1, 1, 1, new Date(), "123"));
+            productRepository.saveAll(List.of(
+                    new Product(1, Base64.getEncoder().encodeToString(bFile1), "Food1", "", 100),
+                    new Product(2, Base64.getEncoder().encodeToString(bFile2), "Food2", "", 200)
+            ));
         };
     }
 }
