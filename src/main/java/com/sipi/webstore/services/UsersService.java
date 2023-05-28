@@ -24,8 +24,8 @@ public class UsersService {
     }
 
     ///\brief Метод поиска пользователя по почте
-    public Users findUser(String mail) {
-        Optional<Users> foundUser = usersRepository.findUserByMail(mail);
+    public Users findUser(String login) {
+        Optional<Users> foundUser = usersRepository.findUserByLogin(login);
         return foundUser.orElse(null);
     }
 

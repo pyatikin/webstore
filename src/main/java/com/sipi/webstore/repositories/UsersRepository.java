@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 
     /// Метод для поиска пользователя по почте
-    Optional<Users> findUserByMail(String mail);
+    Optional<Users> findUserByLogin(String login);
 }

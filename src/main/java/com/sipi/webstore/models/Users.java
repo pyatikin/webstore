@@ -1,7 +1,6 @@
 package com.sipi.webstore.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,9 +29,8 @@ public class Users implements UserDetails {
     @Column(name = "name")
     private String name; /// Поле имя пользователя в БД
 
-    @Column(name = "mail")
-    @Email
-    private  String mail; /// Поле почта пользователя в БД
+    @Column(name = "login")
+    private  String login; /// Поле почта пользователя в БД
     @Column(name = "phone")
     private String phone; /// Поле телефон пользователя в БД
     @Column(name = "password")
@@ -41,9 +39,9 @@ public class Users implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Users(String name, String mail, String password) {
+    public Users(String name, String login, String password) {
         this.name = name;
-        this.mail = mail;
+        this.login = login;
         this.password = password;
     }
 
@@ -54,7 +52,7 @@ public class Users implements UserDetails {
 
     @Override
     public String getUsername() {
-        return mail;
+        return login;
     }
 
     @Override
