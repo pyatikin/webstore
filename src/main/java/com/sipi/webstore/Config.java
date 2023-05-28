@@ -36,14 +36,14 @@ public class Config implements ResourceLoaderAware {
             InputStream inputStream1 = resource1.getInputStream();
             byte[] bFile1 = inputStreamToByteArray(inputStream1);
 
-            /*Resource resource2 = resourceLoader.getResource("classpath:food2.png");
+            Resource resource2 = resourceLoader.getResource("classpath:food2.png");
             InputStream inputStream2 = resource2.getInputStream();
-            byte[] bFile2 = inputStreamToByteArray(inputStream2);*/
+            byte[] bFile2 = inputStreamToByteArray(inputStream2);
 
             orderRepository.save(new Orders(1, 1, 1, 1, 1, 1, new Date(), "123"));
             productRepository.saveAll(List.of(
-                    new Product(1, Base64.getEncoder().encodeToString(bFile1), "Food1", "", 100)/*,
-                    new Product(2, Base64.getEncoder().encodeToString(bFile2), "Food2", "", 200)*/
+                    new Product(1, Base64.getEncoder().encodeToString(bFile1), "Food1", "", 100),
+                    new Product(2, Base64.getEncoder().encodeToString(bFile2), "Food2", "", 200)
             ));
         };
     }
